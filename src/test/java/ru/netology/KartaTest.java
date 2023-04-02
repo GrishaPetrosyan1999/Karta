@@ -1,4 +1,5 @@
 package ru.netology;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -6,9 +7,12 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Condition.exactText;
 
 public class KartaTest {
+    @BeforeEach
+            void setupTest(){
+        open("http://localhost:9999");
+    }
     @Test
     void shouldSuccessfulSendValidForm() {
-        open("http://localhost:9999");
         $("[data-test-id=name] input").setValue("Иванов-Петров Иван");
         $("[data-test-id=phone] input").setValue("+79270000000");
         $("[data-test-id=agreement]").click();
@@ -17,7 +21,6 @@ public class KartaTest {
     }
     @Test
     void shouldGetErrorMessageIfNameInvalid() {
-        open("http://localhost:9999");
         $("[data-test-id=name] input").setValue("Ivanov Ivan");
         $("[data-test-id=agreement]").click();
         $(".button").click();
@@ -25,7 +28,6 @@ public class KartaTest {
     }
     @Test
     void shouldGetErrorMessageIfNameEmpty() {
-        open("http://localhost:9999");
         $("[data-test-id=name] input").setValue("");
         $("[data-test-id=agreement]").click();
         $(".button").click();
@@ -33,7 +35,6 @@ public class KartaTest {
     }
     @Test
     void shouldGetErrorMessageIfPhoneInvalid() {
-        open("http://localhost:9999");
         $("[data-test-id=name] input").setValue("Иванов-Петров Иван");
         $("[data-test-id=phone] input").setValue("+792700000000");
         $("[data-test-id=agreement]").click();
@@ -42,7 +43,6 @@ public class KartaTest {
     }
     @Test
     void shouldGetErrorMessageIfPhoneEmpty() {
-        open("http://localhost:9999");
         $("[data-test-id=name] input").setValue("Иванов-Петров Иван");
         $("[data-test-id=phone] input").setValue("");
         $("[data-test-id=agreement]").click();
@@ -52,7 +52,6 @@ public class KartaTest {
 
     @Test
     void shouldInvalidCheckbox() {
-        open("http://localhost:9999");
         $("[data-test-id=name] input").setValue("Иванов-Петров Иван");
         $("[data-test-id=phone] input").setValue("+79270000000");
         $(".button").click();
